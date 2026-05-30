@@ -1,29 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Salário Maternidade INSS — Análise Gratuita" },
+      { name: "description", content: "Descubra em menos de 1 minuto se você tem direito a receber até R$ 6.484 do INSS." },
+      { property: "og:title", content: "Salário Maternidade INSS — Análise Gratuita" },
+      { property: "og:description", content: "Análise 100% gratuita, sem burocracia." },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+  useEffect(() => {
+    window.location.replace("/quiz.html");
+  }, []);
+  return null;
 }

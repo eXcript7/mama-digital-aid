@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Salário Maternidade INSS — Análise Gratuita</title>
+<meta name="description" content="Descubra em menos de 1 minuto se você tem direito a receber até R$ 6.484 de Salário-Maternidade do INSS. Análise 100% gratuita." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#f7f4ef;
+    --surface:#ffffff;
+    --ink:#1f1b16;
+    --ink-soft:#5b5347;
+    --muted:#8a8175;
+    --line:#ece6dc;
+    --green:#16a34a;
+    --green-dark:#15803d;
+    --green-soft:#e7f6ec;
+    --pink:#f9e2ec;
+    --pink-ink:#b03a6b;
+    --red:#dc2626;
+    --red-soft:#fde8e8;
+    --gold:#f5d491;
+    --shadow:0 10px 30px -12px rgba(60,40,20,.18);
+    --radius:18px;
+  }
+  html,body{background:var(--bg);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+  body{min-height:100dvh;display:flex;justify-content:center;padding:16px}
+  .app{width:100%;max-width:430px;display:flex;flex-direction:column;gap:18px}
+
+  /* HERO */
+  .hero-img{width:100%;aspect-ratio:4/3;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:#eee}
+  .hero-img img{width:100%;height:100%;object-fit:cover;display:block}
+  .badge{display:inline-flex;align-items:center;gap:6px;background:var(--pink);color:var(--pink-ink);font-weight:600;font-size:13px;padding:8px 14px;border-radius:999px;align-self:flex-start}
+  h1{font-size:28px;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+  h1 .hl{color:var(--green-dark)}
+  .sub{font-weight:700;font-size:16px;color:var(--ink)}
+  .desc{font-size:15px;color:var(--ink-soft)}
+  .benefits{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+  .benefits div{font-size:14px;color:var(--ink-soft);display:flex;gap:8px;align-items:center}
+
+  /* CTA */
+  .btn{appearance:none;border:0;cursor:pointer;font-family:inherit;font-weight:700;font-size:16px;padding:16px 18px;border-radius:14px;width:100%;transition:transform .15s ease,box-shadow .2s ease,background .2s ease}
+  .btn:active{transform:scale(.98)}
+  .btn-primary{background:var(--green);color:#fff;box-shadow:0 8px 20px -8px rgba(22,163,74,.6)}
+  .btn-primary:hover{background:var(--green-dark)}
+  .btn-secondary{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+  .btn-secondary:hover{border-color:var(--ink)}
+  .btn-wa{background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;gap:10px;font-size:17px;padding:18px;box-shadow:0 10px 24px -10px rgba(37,211,102,.7)}
+  .btn-wa:hover{background:#1da851}
+
+  /* CARD / QUIZ */
+  .card{background:var(--surface);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .step{display:none;animation:fade .35s ease both}
+  .step.active{display:flex;flex-direction:column;gap:16px}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .q{font-size:20px;font-weight:700;letter-spacing:-.01em}
+  .hint{font-size:13px;color:var(--muted)}
+  .input{width:100%;padding:14px 16px;border-radius:12px;border:1.5px solid var(--line);background:#fff;font-size:16px;font-family:inherit;color:var(--ink);transition:border .15s}
+  .input:focus{outline:none;border-color:var(--green)}
+  .options{display:flex;flex-direction:column;gap:10px}
+  .opt{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;text-align:left;font-family:inherit;font-size:15px;font-weight:600;color:var(--ink);cursor:pointer;display:flex;align-items:center;gap:10px;transition:all .15s}
+  .opt:hover{border-color:var(--green);background:var(--green-soft)}
+  .progress{height:6px;background:var(--line);border-radius:999px;overflow:hidden;margin-bottom:6px}
+  .progress > span{display:block;height:100%;background:var(--green);width:0%;transition:width .4s ease;border-radius:999px}
+  .back{background:none;border:0;color:var(--muted);font-size:13px;cursor:pointer;font-family:inherit;align-self:flex-start;padding:4px 0}
+  .back:hover{color:var(--ink)}
+
+  /* RESULT */
+  .result-icon{width:64px;height:64px;border-radius:50%;background:var(--green-soft);color:var(--green-dark);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto}
+  .result-title{font-size:22px;font-weight:800;text-align:center;letter-spacing:-.01em}
+  .result-text{font-size:15px;color:var(--ink-soft);text-align:center}
+
+  .urgent{background:var(--red-soft);border:1.5px solid #f5b8b8;border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px}
+  .urgent .t{color:var(--red);font-weight:800;font-size:15px}
+  .urgent p{font-size:14px;color:#7a1f1f;line-height:1.55}
+
+  .footer{text-align:center;font-size:12px;color:var(--muted);padding:12px 0 24px}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HERO -->
+  <section id="hero" class="step active" style="display:flex;flex-direction:column;gap:16px">
+    <div class="hero-img">
+      <img src="/gestante.jpg" alt="Gestante feliz" />
+    </div>
+    <span class="badge">💗 Salário-maternidade INSS</span>
+    <h1>Descubra se você pode receber até <span class="hl">R$ 6.484</span> do INSS.</h1>
+    <p class="sub">Mesmo desempregada, MEI ou CLT.</p>
+    <p class="desc">Faça sua análise gratuita em menos de 1 minuto e veja se você tem direito ao benefício.</p>
+    <button class="btn btn-primary" onclick="startQuiz()">Quero fazer minha análise gratuita →</button>
+    <div class="benefits">
+      <div>✅ 100% online</div>
+      <div>✅ Sem burocracia</div>
+      <div>✅ Sem pagamento antecipado</div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="card" style="display:none">
+    <div class="progress"><span id="bar"></span></div>
+    <button class="back" id="backBtn" onclick="goBack()" style="display:none">← Voltar</button>
+
+    <div class="step" data-step="name">
+      <h2 class="q">Qual é o seu nome?</h2>
+      <input class="input" id="name" type="text" placeholder="Digite seu nome" autocomplete="given-name" />
+      <button class="btn btn-primary" onclick="submitName()">Continuar</button>
+    </div>
+
+    <div class="step" data-step="moment">
+      <h2 class="q">Qual é o seu momento atual?</h2>
+      <div class="options">
+        <button class="opt" onclick="setMoment('gravida')">🤰 Estou grávida</button>
+        <button class="opt" onclick="setMoment('mae')">👶 Meu bebê já nasceu</button>
+      </div>
+    </div>
+
+    <div class="step" data-step="birth">
+      <h2 class="q">Qual a data de nascimento do bebê?</h2>
+      <input class="input" id="birth" type="date" />
+      <button class="btn btn-primary" onclick="submitBirth()">Continuar</button>
+    </div>
+
+    <div class="step" data-step="work">
+      <h2 class="q">Qual é sua situação de trabalho?</h2>
+      <div class="options">
+        <button class="opt" onclick="setWork('clt')">Carteira assinada (CLT)</button>
+        <button class="opt" onclick="setWork('mei')">MEI / Autônoma</button>
+        <button class="opt" onclick="setWork('desempregada')">Desempregada (já trabalhei CLT)</button>
+        <button class="opt" onclick="setWork('nunca')">Nunca trabalhei registrada</button>
+      </div>
+    </div>
+
+    <div class="step" data-step="concomitancia">
+      <h2 class="q">Você tinha MEI ou trabalhava por conta própria?</h2>
+      <div class="options">
+        <button class="opt" onclick="setConc('sim')">Sim</button>
+        <button class="opt" onclick="setConc('nao')">Não</button>
+      </div>
+    </div>
+
+    <div class="step" data-step="das">
+      <h2 class="q">As guias DAS estavam em dia?</h2>
+      <div class="options">
+        <button class="opt" onclick="setDas('sim')">Sim</button>
+        <button class="opt" onclick="setDas('nao')">Não</button>
+      </div>
+    </div>
+
+    <div class="step" data-step="demissao">
+      <h2 class="q">Qual foi a data da sua demissão?</h2>
+      <input class="input" id="demissao" type="date" />
+      <button class="btn btn-primary" onclick="submitDemissao()">Continuar</button>
+    </div>
+
+    <div class="step" data-step="seguro">
+      <h2 class="q">Você recebeu seguro-desemprego?</h2>
+      <div class="options">
+        <button class="opt" onclick="setSeguro('sim')">Sim</button>
+        <button class="opt" onclick="setSeguro('nao')">Não</button>
+      </div>
+    </div>
+
+    <!-- APROVADA -->
+    <div class="step" data-step="aprovada">
+      <div class="result-icon">💛</div>
+      <h2 class="result-title">Seu perfil foi pré-aprovado 💛</h2>
+      <p class="result-text">Nossa equipe especializada irá analisar gratuitamente o seu caso.</p>
+      <div id="urgenteBox" class="urgent" style="display:none">
+        <div class="t">🔴 ATENÇÃO: PRAZO URGENTE!</div>
+        <p>Como o bebê nasceu recentemente, seu caso pode estar dentro da janela de oportunidade para garantir o Salário Maternidade pelo INSS.</p>
+        <p>⏳ Esse prazo pode encerrar até o dia 15 do próximo mês ao nascimento do bebê.</p>
+        <p>Por isso, é muito importante realizar o seu enquadramento o quanto antes para assegurar o benefício.</p>
+      </div>
+      <button class="btn btn-wa" onclick="sendWhatsApp()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.94 11.94 0 0 0 12.04 0C5.5 0 .2 5.3.2 11.84c0 2.08.55 4.11 1.6 5.9L.05 24l6.4-1.68a11.83 11.83 0 0 0 5.6 1.42h.01c6.54 0 11.84-5.3 11.84-11.84 0-3.16-1.23-6.13-3.38-8.42zM12.05 21.7h-.01a9.85 9.85 0 0 1-5.02-1.37l-.36-.21-3.8 1 1.01-3.7-.23-.38a9.86 9.86 0 1 1 18.3-5.2c0 5.43-4.42 9.86-9.89 9.86zm5.42-7.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15s-.77.97-.94 1.17c-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.05 1.02-1.05 2.5s1.07 2.9 1.22 3.1c.15.2 2.1 3.21 5.1 4.5.71.31 1.27.5 1.7.64.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z"/></svg>
+        Falar no WhatsApp
+      </button>
+    </div>
+
+    <!-- REPROVADA -->
+    <div class="step" data-step="reprovada">
+      <div class="result-icon" style="background:#fde8e8;color:#b91c1c">!</div>
+      <h2 class="result-title">Análise concluída</h2>
+      <p class="result-text">No momento não encontramos indícios suficientes para aprovação automática.</p>
+      <button class="btn btn-wa" onclick="sendWhatsApp()">Falar com suporte</button>
+    </div>
+  </section>
+
+  <div class="footer">© Salário Maternidade INSS — Análise gratuita e sem compromisso</div>
+</div>
+
+<script>
+  // CONFIG
+  const WHATSAPP_NUMBER = "5511999999999"; // <-- TROQUE PELO SEU NÚMERO (formato: 55 + DDD + número)
+
+  const state = {
+    nome:"", momento:"", nascimento:"", trabalho:"",
+    concomitancia:"", das:"", demissao:"", seguro:"",
+    urgente:false, aprovada:null
+  };
+  const history = [];
+  const steps = ["name","moment","birth","work","concomitancia","das","demissao","seguro","aprovada","reprovada"];
+
+  function $(s){return document.querySelector(s)}
+  function showStep(name){
+    document.querySelectorAll('#quiz .step').forEach(s=>s.classList.remove('active'));
+    const el = document.querySelector(`[data-step="${name}"]`);
+    if(el) el.classList.add('active');
+    updateProgress(name);
+    $('#backBtn').style.display = history.length>0 && !['aprovada','reprovada'].includes(name) ? 'block':'none';
+  }
+  function go(name){ history.push(currentStep); currentStep = name; showStep(name); }
+  function goBack(){ if(history.length===0) return; currentStep = history.pop(); showStep(currentStep); }
+  let currentStep = "name";
+  function updateProgress(name){
+    const map = {name:10,moment:25,birth:40,work:55,concomitancia:70,das:85,demissao:70,seguro:85,aprovada:100,reprovada:100};
+    $('#bar').style.width = (map[name]||0)+"%";
+  }
+
+  function startQuiz(){
+    $('#hero').style.display = 'none';
+    $('#quiz').style.display = 'block';
+    showStep('name');
+    setTimeout(()=>$('#name').focus(),200);
+  }
+
+  function submitName(){
+    const v = $('#name').value.trim();
+    if(!v){ $('#name').focus(); return; }
+    state.nome = v;
+    go('moment');
+  }
+
+  function setMoment(m){
+    state.momento = m;
+    if(m==='gravida'){
+      go('work');
+    } else {
+      go('birth');
+    }
+  }
+
+  function submitBirth(){
+    const v = $('#birth').value;
+    if(!v){ $('#birth').focus(); return; }
+    state.nascimento = v;
+    go('work');
+  }
+
+  // Regra do dia 15: dentro do prazo se hoje <= dia 15 do mês seguinte ao nascimento
+  function dentroDoPrazo15(dataNascStr){
+    if(!dataNascStr) return false;
+    const [y,m,d] = dataNascStr.split('-').map(Number);
+    const nasc = new Date(y, m-1, d);
+    const limite = new Date(y, m, 15, 23, 59, 59); // dia 15 do mês seguinte
+    const hoje = new Date();
+    return hoje >= nasc && hoje <= limite;
+  }
+
+  function setWork(w){
+    state.trabalho = w;
+    if(state.momento === 'gravida'){
+      // Regra 1: todas aprovadas
+      finalizar(true);
+      return;
+    }
+    // Já é mãe
+    state.urgente = dentroDoPrazo15(state.nascimento);
+
+    if(w === 'mei'){ finalizar(true); return; } // Regra 5
+    if(w === 'clt'){
+      if(state.urgente){ finalizar(true); return; }
+      go('concomitancia');
+      return;
+    }
+    if(w === 'desempregada'){
+      if(state.urgente){ finalizar(true); return; }
+      go('demissao');
+      return;
+    }
+    if(w === 'nunca'){
+      finalizar(state.urgente); // Regra 6
+      return;
+    }
+  }
+
+  function setConc(v){
+    state.concomitancia = v;
+    if(v==='nao'){ finalizar(false); return; }
+    go('das');
+  }
+  function setDas(v){
+    state.das = v;
+    finalizar(v==='sim');
+  }
+
+  function submitDemissao(){
+    const v = $('#demissao').value;
+    if(!v){ $('#demissao').focus(); return; }
+    state.demissao = v;
+    go('seguro');
+  }
+  function setSeguro(v){
+    state.seguro = v;
+    // Período de graça: sem seguro = 12 meses; com seguro = 24 meses
+    const meses = v==='sim' ? 24 : 12;
+    const [y,m,d] = state.demissao.split('-').map(Number);
+    const limite = new Date(y, m-1+meses, d);
+    const [yn,mn,dn] = state.nascimento.split('-').map(Number);
+    const parto = new Date(yn, mn-1, dn);
+    finalizar(parto <= limite);
+  }
+
+  function finalizar(aprovada){
+    state.aprovada = aprovada;
+    if(aprovada){
+      $('#urgenteBox').style.display = state.urgente ? 'flex':'none';
+      go('aprovada');
+    } else {
+      go('reprovada');
+    }
+  }
+
+  function labelTrabalho(t){
+    return {clt:'CLT (Carteira assinada)',mei:'MEI / Autônoma',desempregada:'Desempregada (já trabalhou CLT)',nunca:'Nunca trabalhou registrada'}[t]||'-';
+  }
+  function fmtData(s){
+    if(!s) return '-';
+    const [y,m,d]=s.split('-');
+    return `${d}/${m}/${y}`;
+  }
+
+  function sendWhatsApp(){
+    const linhas = [
+      `Olá! Acabei de fazer a análise no quiz do Salário-Maternidade.`,
+      ``,
+      `*Nome:* ${state.nome}`,
+      `*Situação:* ${state.aprovada ? 'Pré-aprovada ✅' : 'Análise manual'}`,
+      `*Momento:* ${state.momento==='gravida' ? 'Grávida 🤰' : 'Bebê já nasceu 👶'}`,
+      `*Trabalho:* ${labelTrabalho(state.trabalho)}`
+    ];
+    if(state.nascimento) linhas.push(`*Nascimento do bebê:* ${fmtData(state.nascimento)}`);
+    if(state.demissao) linhas.push(`*Data da demissão:* ${fmtData(state.demissao)}`);
+    if(state.seguro) linhas.push(`*Seguro-desemprego:* ${state.seguro==='sim'?'Sim':'Não'}`);
+    if(state.concomitancia) linhas.push(`*Tinha MEI/autônomo concomitante:* ${state.concomitancia==='sim'?'Sim':'Não'}`);
+    if(state.das) linhas.push(`*Guias DAS em dia:* ${state.das==='sim'?'Sim':'Não'}`);
+    if(state.urgente) linhas.push(`*⏰ DENTRO DO PRAZO URGENTE (regra do dia 15)*`);
+    linhas.push(``, `Gostaria de continuar minha análise gratuita.`);
+
+    const msg = encodeURIComponent(linhas.join('\n'));
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
+  }
+
+  // Enter para avançar inputs
+  document.addEventListener('keydown', e=>{
+    if(e.key!=='Enter') return;
+    if(currentStep==='name') submitName();
+    if(currentStep==='birth') submitBirth();
+    if(currentStep==='demissao') submitDemissao();
+  });
+</script>
+</body>
+</html>
