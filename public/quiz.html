@@ -155,7 +155,7 @@
 
     <div class="step" data-step="demissao">
       <h2 class="q">Qual foi a data da sua demissão?</h2>
-      <input class="input" id="demissao" type="date" />
+      <input class="input" id="demissao" type="text" placeholder="dd/mm/aaaa" maxlength="10" oninput="maskDate(this)" />
       <button class="btn btn-primary" onclick="submitDemissao()">Continuar</button>
     </div>
 
