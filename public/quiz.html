@@ -327,6 +327,8 @@
     state.aprovada = aprovada;
     if(aprovada){
       $('#urgenteBox').style.display = state.urgente ? 'flex':'none';
+      const primeiroNome = (state.nome||'').split(' ')[0];
+      $('#aprovadaTitle').textContent = `${primeiroNome}, você tem direito ao salário-maternidade`;
       go('aprovada');
     } else {
       go('reprovada');
