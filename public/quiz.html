@@ -322,8 +322,9 @@
 
   function submitDemissao(){
     const v = $('#demissao').value;
-    if(!v){ $('#demissao').focus(); return; }
-    state.demissao = v;
+    if(!v || v.length < 10){ $('#demissao').focus(); return; }
+    state.demissao = parseDateBR(v);
+    if(!state.demissao){ $('#demissao').focus(); return; }
     go('seguro');
   }
   function setSeguro(v){
