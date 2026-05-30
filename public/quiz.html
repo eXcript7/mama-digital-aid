@@ -123,7 +123,7 @@
 
     <div class="step" data-step="birth">
       <h2 class="q" id="birthQ">Qual a data de nascimento do bebê?</h2>
-      <input class="input" id="birth" type="date" />
+      <input class="input" id="birth" type="text" placeholder="dd/mm/aaaa" maxlength="10" oninput="maskDate(this)" />
       <button class="btn btn-primary" onclick="submitBirth()">Continuar</button>
     </div>
 
@@ -155,7 +155,7 @@
 
     <div class="step" data-step="demissao">
       <h2 class="q">Qual foi a data da sua demissão?</h2>
-      <input class="input" id="demissao" type="date" />
+      <input class="input" id="demissao" type="text" placeholder="dd/mm/aaaa" maxlength="10" oninput="maskDate(this)" />
       <button class="btn btn-primary" onclick="submitDemissao()">Continuar</button>
     </div>
 
@@ -252,10 +252,24 @@
     go('birth');
   }
 
+  function maskDate(el){
+    let v = el.value.replace(/\D/g,'');
+    if(v.length > 2) v = v.slice(0,2) + '/' + v.slice(2);
+    if(v.length > 5) v = v.slice(0,5) + '/' + v.slice(5,9);
+    el.value = v;
+  }
+  function parseDateBR(br){
+    if(!br) return '';
+    const [d,m,y] = br.split('/');
+    if(!d||!m||!y) return '';
+    return `${y}-${m}-${d}`;
+  }
+
   function submitBirth(){
     const v = $('#birth').value;
-    if(!v){ $('#birth').focus(); return; }
-    state.nascimento = v;
+    if(!v || v.length < 10){ $('#birth').focus(); return; }
+    state.nascimento = parseDateBR(v);
+    if(!state.nascimento){ $('#birth').focus(); return; }
     go('work');
   }
 
@@ -308,8 +322,9 @@
 
   function submitDemissao(){
     const v = $('#demissao').value;
-    if(!v){ $('#demissao').focus(); return; }
-    state.demissao = v;
+    if(!v || v.length < 10){ $('#demissao').focus(); return; }
+    state.demissao = parseDateBR(v);
+    if(!state.demissao){ $('#demissao').focus(); return; }
     go('seguro');
   }
   function setSeguro(v){
