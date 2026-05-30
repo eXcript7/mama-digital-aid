@@ -248,11 +248,8 @@
 
   function setMoment(m){
     state.momento = m;
-    if(m==='gravida'){
-      go('work');
-    } else {
-      go('birth');
-    }
+    $('#birthQ').textContent = m==='gravida' ? 'Qual a data prevista de nascimento do bebê?' : 'Qual a data de nascimento do bebê?';
+    go('birth');
   }
 
   function submitBirth(){
