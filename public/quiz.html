@@ -353,7 +353,7 @@
     if(state.concomitancia) linhas.push(`*Tinha MEI/autônomo concomitante:* ${state.concomitancia==='sim'?'Sim':'Não'}`);
     if(state.das) linhas.push(`*Guias DAS em dia:* ${state.das==='sim'?'Sim':'Não'}`);
     
-    linhas.push(``, `Gostaria de continuar minha análise gratuita.`);
+    linhas.push(``, `Gostaria de garantir o meu benefício.`);
 
     const msg = encodeURIComponent(linhas.join('\n'));
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
