@@ -123,7 +123,7 @@
 
     <div class="step" data-step="birth">
       <h2 class="q" id="birthQ">Qual a data de nascimento do bebê?</h2>
-      <input class="input" id="birth" type="date" />
+      <input class="input" id="birth" type="text" placeholder="dd/mm/aaaa" maxlength="10" oninput="maskDate(this)" />
       <button class="btn btn-primary" onclick="submitBirth()">Continuar</button>
     </div>
 
