@@ -122,7 +122,7 @@
     </div>
 
     <div class="step" data-step="birth">
-      <h2 class="q">Qual a data de nascimento do bebê?</h2>
+      <h2 class="q" id="birthQ">Qual a data de nascimento do bebê?</h2>
       <input class="input" id="birth" type="date" />
       <button class="btn btn-primary" onclick="submitBirth()">Continuar</button>
     </div>
@@ -169,13 +169,21 @@
 
     <!-- APROVADA -->
     <div class="step" data-step="aprovada">
-      <div class="result-icon">💛</div>
-      <h2 class="result-title">Seu perfil foi pré-aprovado 💛</h2>
+      <div class="result-icon">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div style="display:flex;justify-content:center">
+        <span class="badge" style="background:var(--green-soft);color:var(--green-dark);align-self:center">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          CASO FORTE
+        </span>
+      </div>
+      <h2 class="result-title" id="aprovadaTitle">Você tem direito ao salário-maternidade</h2>
       <p class="result-text">Nossa equipe especializada irá analisar gratuitamente o seu caso.</p>
       <div id="urgenteBox" class="urgent" style="display:none">
-        <div class="t">🔴 ATENÇÃO: PRAZO URGENTE!</div>
+        <div class="t">ATENÇÃO: PRAZO URGENTE!</div>
         <p>Como o bebê nasceu recentemente, seu caso pode estar dentro da janela de oportunidade para garantir o Salário Maternidade pelo INSS.</p>
-        <p>⏳ Esse prazo pode encerrar até o dia 15 do próximo mês ao nascimento do bebê.</p>
+        <p>Esse prazo pode encerrar até o dia 15 do próximo mês ao nascimento do bebê.</p>
         <p>Por isso, é muito importante realizar o seu enquadramento o quanto antes para assegurar o benefício.</p>
       </div>
       <button class="btn btn-wa" onclick="sendWhatsApp()">
@@ -240,11 +248,8 @@
 
   function setMoment(m){
     state.momento = m;
-    if(m==='gravida'){
-      go('work');
-    } else {
-      go('birth');
-    }
+    $('#birthQ').textContent = m==='gravida' ? 'Qual a data prevista de nascimento do bebê?' : 'Qual a data de nascimento do bebê?';
+    go('birth');
   }
 
   function submitBirth(){
@@ -322,6 +327,8 @@
     state.aprovada = aprovada;
     if(aprovada){
       $('#urgenteBox').style.display = state.urgente ? 'flex':'none';
+      const primeiroNome = (state.nome||'').split(' ')[0];
+      $('#aprovadaTitle').textContent = `${primeiroNome}, você tem direito ao salário-maternidade`;
       go('aprovada');
     } else {
       go('reprovada');
