@@ -342,8 +342,9 @@
       `Olá! Acabei de fazer a análise no quiz do Salário-Maternidade.`,
       ``,
       `*Nome:* ${state.nome}`,
-      `*Situação:* ${state.aprovada ? 'Pré-aprovada ✅' : 'Análise manual'}`,
-      `*Momento:* ${state.momento==='gravida' ? 'Grávida 🤰' : 'Bebê já nasceu 👶'}`,
+      `*Situação:* ${state.aprovada ? 'Pré-aprovada' : 'Análise manual'}`,
+      `*Momento:* ${state.momento==='gravida' ? 'Grávida' : 'Bebê já nasceu'}`,
+
       `*Trabalho:* ${labelTrabalho(state.trabalho)}`
     ];
     if(state.nascimento) linhas.push(`*Nascimento do bebê:* ${fmtData(state.nascimento)}`);
@@ -351,7 +352,7 @@
     if(state.seguro) linhas.push(`*Seguro-desemprego:* ${state.seguro==='sim'?'Sim':'Não'}`);
     if(state.concomitancia) linhas.push(`*Tinha MEI/autônomo concomitante:* ${state.concomitancia==='sim'?'Sim':'Não'}`);
     if(state.das) linhas.push(`*Guias DAS em dia:* ${state.das==='sim'?'Sim':'Não'}`);
-    if(state.urgente) linhas.push(`*⏰ DENTRO DO PRAZO URGENTE (regra do dia 15)*`);
+    
     linhas.push(``, `Gostaria de continuar minha análise gratuita.`);
 
     const msg = encodeURIComponent(linhas.join('\n'));
